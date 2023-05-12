@@ -1,0 +1,6 @@
+id,password,last_login,is_superuser,username,first_name,last_name,email,is_staff,is_active,date_joined,role,phone,car_brand,car_model
+1,pbkdf2_sha256$390000$pw4Op8Me7P1vcZ3Iqphfru$OMUJiy18zSqcONosOcdGj+RBfaCy6u4EjLZcOhvqI6Q=,2023-04-29 12:33:46.234462,1,admin,,,admin@admin.ru,1,1,2023-04-29 12:33:32.170856,user,,,
+2,pbkdf2_sha256$390000$s8t2OJITuVunZFyELdDKUQ$d8MxKB+GRSl50iNeMQuSUuQy9sKAGiS6cpMQmErFZHU=,,0,Петрович,,,volodka@fake.ru,0,1,2023-04-29 14:26:59.101954,user,+79259016573,Москвич,3110
+3,pbkdf2_sha256$390000$sYCHeo1R5SjnU52YiSPy1C$FBdfJDuo5Oqa4B19qfhUWTOEa9W7JXK69JEm6NG+IaY=,,0,leo,,,leo@mail.ru,0,1,2023-04-29 14:54:09.751927,user,+79259016575,Audi,q7
+4,pbkdf2_sha256$390000$EIQGYWSzeBuYM3GBZc4aHH$QIuLd+DlGkHk/x4NDdgOLhyWeHgPqC2OdotO5MLOjzA=,,0,kate,,,kukla2@chev.ru,0,1,2023-04-29 15:10:07.477933,user,+79259013574,mercedes benz,sprinter
+5,pbkdf2_sha256$390000$JlKnSxersN0enZxMyzWwpP$ZMHJDJP8UdNIafiWg8r1RzFvPIg3VygDKT7er/xRnNM=,,0,Pupok,,,volodka33@fake.ru,0,1,2023-04-29 15:11:22.372973,user,+79259012574,Волга,412
