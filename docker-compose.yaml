@@ -1,0 +1,15 @@
+services:
+  backend:
+    build: ./shinata_backend       
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./shinata_backend:/shinata_backend
+    command: bash -c "python manage.py runserver 0.0.0.0:8000"
+
+  web:
+    build: ./shinata_frontend 
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./shinata_frontend:/shinata_frontend 
