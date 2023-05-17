@@ -1,5 +1,6 @@
 import csv
 
+from django.db.utils import IntegrityError
 from django.conf import settings
 from django.core.management import BaseCommand
 
@@ -8,9 +9,9 @@ from shinata.models import (Category, Client, ComplexServices, Service, ComplexS
 
 TABLES = {
     ProductsCategory: 'productscategory.csv',
-    Client: 'client.csv',
-    Category: 'category.csv',
+    # Client: 'client.csv',
     Product: 'product.csv',
+    Category: 'category.csv',
     Service: 'service.csv',
     ComplexServices: 'complexservices.csv',
     ComplexServicesService: 'complexservicesservice.csv'
@@ -28,6 +29,10 @@ class Command(BaseCommand):
                     encoding='utf-8'
             ) as csv_file:
                 reader = csv.DictReader(csv_file)
-                model.objects.bulk_create(
-                    model(**data) for data in reader)
+                try:
+                    model.objects.bulk_create(
+                        model(**data) for data in reader)
+                except IntegrityError:
+                    self.stdout.write(self.style.ERROR_OUTPUT('данные уже были загружены! Или ошибки в csv файлах!'))
+                    continue
         self.stdout.write(self.style.SUCCESS('Все данные загружены'))
