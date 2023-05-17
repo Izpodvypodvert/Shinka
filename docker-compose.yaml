@@ -5,11 +5,38 @@ services:
       - "8000:8000"
     volumes:
       - ./shinata_backend:/shinata_backend
-    command: bash -c "python manage.py runserver 0.0.0.0:8000"
+      - static:/shinata_backend/static
+      - media:/shinata_backend/media
+    # command: gunicorn shinata_backend.wsgi --bind 0.0.0.0:8000
 
-  web:
+  frontend:
     build: ./shinata_frontend 
+    # volumes:
+    #   - shinata_build:/shinata_frontend/build
+    restart: unless-stopped
+    expose:
+      - 3000
+    command: serve -s /shinata_frontend/build -l 3000
+    depends_on:
+      - backend
+
+  nginx:
+    image: nginx:latest
+    restart: unless-stopped
     ports:
-      - "3000:3000"
+      - 80:8080
     volumes:
-      - ./shinata_frontend:/shinata_frontend 
+      - ./nginx/nginx-setup.conf:/etc/nginx/conf.d/default.conf:ro
+      # - shinata_build:/var/www/react
+      - static:/shinata_backend/static
+      - media:/shinata_backend/media
+    depends_on:
+      # - backend
+      - frontend
+
+volumes:
+  shinata_build:
+  static:
+    external: false
+  media:
+    external: false 

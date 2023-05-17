@@ -240,36 +240,6 @@ class ProductsCategory(models.Model):
         return self.title
 
 
-class Order(models.Model):
-    total_price = models.DecimalField(
-        'Итоговая стоимость заказа',
-        max_digits=7,
-        decimal_places=2,
-        null=True,
-        blank=True)
-    created = models.DateTimeField(
-        'Дата создания заказа', auto_now_add=True
-    )
-    client = models.ForeignKey(
-        Client, on_delete=models.CASCADE, related_name='orders'
-    )
-
-
-class OrderItem(models.Model):
-    quantity = models.IntegerField('Количество товара в заказе', blank=True)
-    price = models.DecimalField(
-        'Цена строки заказа',
-        max_digits=7,
-        decimal_places=2,
-        null=True,
-        blank=True)
-    order = models.ForeignKey(
-        Order,
-        on_delete=models.CASCADE,
-        related_name='orederitems',
-        blank=True,
-        null=True
-    )
 
 
 class Product(models.Model):
@@ -287,14 +257,6 @@ class Product(models.Model):
         blank=True,
         null=True
     )
-    order_item = models.ForeignKey(
-        OrderItem,
-        on_delete=models.SET_NULL,
-        related_name='products_order_item',
-        verbose_name='Номер позиции в заказе',
-        blank=True,
-        null=True
-    )
     description = models.TextField('Описание')
     image = models.ImageField(
         'Изображение товара',
@@ -309,3 +271,4 @@ class Product(models.Model):
         
     def __str__(self):
         return f'{self.brand} {self.description}'
+    
