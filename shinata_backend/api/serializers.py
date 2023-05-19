@@ -70,6 +70,16 @@ class ClientSerializer(serializers.ModelSerializer):
 
     def validate_password(self, value: str) -> str:
         return make_password(value)
+    
+    def create(self, validated_data):
+        role = validated_data.get("role", 'user')
+        users = {'user': {'is_staff': 0, 'is_superuser': 0},
+                 'moderator': {'is_staff': 0, 'is_superuser': 0},
+                 'admin': {'is_staff': 1, 'is_superuser': 0},
+                 }
+        return Client.objects.create(is_staff=users[role]['is_staff'],
+                                   is_superuser=users[role]['is_superuser'],
+                                   **validated_data)
 
 
 class AppointmentsManagerSerializer(serializers.ModelSerializer):

@@ -50,8 +50,14 @@ export const Record = () => {
   }
 
   function handleRecord(userId, appointmentId) {
+    if (!userId) {
+        setMessage("Необходимо войти в систему или зарегистрироваться.")
+        open();
+        return
+    }
+    
     makeRecord(userId, appointmentId).catch((err) => setMessage(err?.[0]));
-    console.log(message);
+    
     if (message?.length == 0) {
       setMessage("Вы успешно записаны на шиномонтаж.");
     }

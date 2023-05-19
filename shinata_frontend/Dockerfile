@@ -2,7 +2,7 @@ FROM node:18.16.0-buster-slim
 
 WORKDIR /shinata_frontend
 
-# ENV PATH /shinata_frontend/node_modules/.bin:$PATH
+ENV NODE_OPTIONS=--max_old_space_size=2048
 
 COPY package.json /shinata_frontend/package.json
 COPY ./package-lock.json .

@@ -15,13 +15,11 @@ from api.utils import get_datetimes
 ADMIN = 'admin'
 MODERATOR = 'moderator'
 USER = 'user'
-SUPERUSER = 'superuser'
 
 ROLES_CHOICES = [
     (ADMIN, ADMIN),
     (MODERATOR, MODERATOR),
     (USER, USER),
-    (SUPERUSER, SUPERUSER),
 ]
 
 

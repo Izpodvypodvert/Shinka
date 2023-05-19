@@ -5,7 +5,7 @@ from rest_framework.response import Response
 
 from rest_framework.generics import ListAPIView
 from rest_framework.exceptions import MethodNotAllowed
-from rest_framework.permissions import IsAuthenticatedOrReadOnly, AllowAny
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, AllowAny, IsAuthenticated
 
 
 from shinata.models import (Product, ProductsCategory, Record, Service, Category, Appointment,
@@ -15,11 +15,13 @@ from .serializers import (ProductCategorySerializer, ProductSerializer, RecordSe
                           AppointmentsManagerSerializer, ComplexServicesSerializer, ClientSerializer,
                           RecordReadSerializer)
 
+from .permissions import IsAdmin, IsAdminOrReadOnly
+
 
 class RecordViewSet(viewsets.ModelViewSet):
     queryset = Record.objects.all()
     serializer_class = RecordSerializer
-    permission_classes = [AllowAny, ]
+    permission_classes = [IsAuthenticatedOrReadOnly, ]
     lookup_field = 'client__username'
 
     def get_object(self):
@@ -42,19 +44,20 @@ class RecordViewSet(viewsets.ModelViewSet):
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-    permission_classes = [AllowAny, ]
+    permission_classes = [IsAdminOrReadOnly, ]
 
 
 class AppointmentViewSet(viewsets.ModelViewSet):
     serializer_class = AppointmentSerializer
-    permission_classes = [AllowAny, ]
-    
-    
+    permission_classes = [IsAdminOrReadOnly, ]
+     
     def get_queryset(self):
         return Appointment.objects.filter(reserved=False)
 
 
 class ApointmentView(APIView):
+    permission_classes = [IsAdminOrReadOnly, ]
+    
     def get(self, request, date):
         appointments = Appointment.objects.filter(dt__year=date.year, dt__month=date.month, dt__day=date.day)
         appointments.filter(dt__lte=timezone.now()).update(expired=True)
@@ -65,14 +68,21 @@ class ApointmentView(APIView):
 class ServiceViewSet(viewsets.ModelViewSet):
     queryset = Service.objects.all()
     serializer_class = ServiceSerializer
-    #permission_classes = [AllowAny, ]
+    permission_classes = [IsAdminOrReadOnly, ]
 
 
 class ClientViewSet(viewsets.ModelViewSet):
     queryset = Client.objects.all()
     serializer_class = ClientSerializer
-    permission_classes = [AllowAny, ]
+    permission_classes = [IsAdmin, ]
     lookup_field = 'username'
+    
+    def get_permissions(self):
+        if self.request.get_full_path() == '/api/v1/clients/me/':
+            return IsAuthenticated(),
+        if self.request.method == 'POST':
+            return AllowAny(),
+        return super().get_permissions()
     
     def get_object(self):
         me = self.kwargs.get('username')
@@ -85,6 +95,8 @@ class ClientViewSet(viewsets.ModelViewSet):
 
 
 class AppointmentsManagerView(APIView):
+    permission_classes = [IsAdmin, ]
+    
     def get(self, request):
         appointments = AppointmentsManager.objects.all()
         serializer = AppointmentsManagerSerializer(appointments, many=True)
@@ -101,10 +113,12 @@ class AppointmentsManagerView(APIView):
 class ComplexServicesViewSet(viewsets.ModelViewSet):
     queryset = ComplexServices.objects.all()
     serializer_class = ComplexServicesSerializer
-    permission_classes = [AllowAny, ]
+    permission_classes = [IsAdminOrReadOnly, ]
     
 
 class ProductCategoryView(APIView):
+    permission_classes = [IsAdminOrReadOnly, ]
+    
     def get(self, request):
         categories = ProductsCategory.objects.all()
         serializer = ProductCategorySerializer(categories, many=True)
@@ -112,15 +126,17 @@ class ProductCategoryView(APIView):
     
     
 class ProductView(APIView):
+    permission_classes = [IsAdminOrReadOnly, ]
+    
     def get(self, request, productcategoryid):
         product_category = ProductsCategory.objects.filter(pk=productcategoryid).first()
         products = product_category.products.all()
-        # products = Product.objects.all()
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data)
 
 
 class ProductListView(ListAPIView):
+    permission_classes = [AllowAny, ]
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     filter_backends = [filters.SearchFilter]

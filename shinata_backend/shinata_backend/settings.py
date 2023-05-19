@@ -16,16 +16,20 @@ SECRET_KEY = 'django-insecure-2sd+!fx+xx%ppiw3ez%_6n4h(2yj)u9@n_3fcy^zm()6op$i_z
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['www.izpodvypodverta.ru', 'izpodvypodverta.ru',
+                 '127.0.0.1', 'localhost', '90.156.209.221', '[::1]']
+
+# ALLOWED_HOSTS = ['*']
 
 # CORS_ALLOWED_ORIGINS = [
 #     'http://localhost',
 #     'http://127.0.0.1',
 #     'http://0.0.0.0',
-# ] 
+# ]
 
 # CORS_ORIGIN_ALLOW_ALL = True
-# CORS_ORIGIN_WHITELIST = ['http://127.0.0.1:3000']
+CORS_ORIGIN_WHITELIST = ['http://www.izpodvypodverta.ru:3000',
+                         'http://izpodvypodverta.ru:3000', 'http://127.0.0.1:3000', 'http://localhost:3000']
 
 
 # Application definition
@@ -125,8 +129,6 @@ USE_I18N = True
 USE_L10N = True
 
 
-
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
@@ -138,9 +140,9 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-    ],
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.IsAuthenticated',
+    # ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
     ],
@@ -156,8 +158,6 @@ REST_FRAMEWORK = {
 }
 
 AUTH_USER_MODEL = 'shinata.Client'
-
-
 
 
 STATIC_URL = '/static/'

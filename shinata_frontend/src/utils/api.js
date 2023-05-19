@@ -77,7 +77,7 @@ const checkResponse = (res) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        authorization: `Token ${localStorage.getItem("auth_token")}`,
+        // authorization: `Token ${localStorage.getItem("auth_token")}`,
       },
     }).then(checkResponse);
   };
@@ -124,7 +124,7 @@ const checkResponse = (res) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        authorization: `Token ${localStorage.getItem("auth_token")}`,
+        // authorization: `Token ${localStorage.getItem("auth_token")}`,
       },
     }).then(checkResponse);
   };
@@ -134,7 +134,7 @@ const checkResponse = (res) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        authorization: `Token ${localStorage.getItem("auth_token")}`,
+        // authorization: `Token ${localStorage.getItem("auth_token")}`,
       },
     }).then(checkResponse);
   };
@@ -144,7 +144,7 @@ const checkResponse = (res) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        authorization: `Token ${localStorage.getItem("auth_token")}`,
+        // authorization: `Token ${localStorage.getItem("auth_token")}`,
       },
     }).then(checkResponse);
   };
@@ -154,7 +154,7 @@ const checkResponse = (res) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        authorization: `Token ${localStorage.getItem("auth_token")}`,
+        // authorization: `Token ${localStorage.getItem("auth_token")}`,
       },
     }).then(checkResponse);
   };
