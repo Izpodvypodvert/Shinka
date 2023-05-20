@@ -122,7 +122,7 @@ export const Record = () => {
         <Button
           onClick={() => handleRecord(user.id, appointmentId)}
           leftIcon=<GiNotebook />
-          color="orange"
+          color="red"
           size="xl"
           radius="lg"
           uppercase

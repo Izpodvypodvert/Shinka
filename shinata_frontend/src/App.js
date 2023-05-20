@@ -26,7 +26,7 @@ function App() {
 
   const [colorScheme, setColorScheme] = useLocalStorage({
     key: 'mantine-color-scheme',
-    defaultValue: 'dark',
+    defaultValue: 'light',
     getInitialValueInEffect: true,
   });
 

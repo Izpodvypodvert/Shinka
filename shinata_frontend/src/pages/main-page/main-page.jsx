@@ -78,14 +78,14 @@ export const MainPage = () => {
         })}
       </Group>
       
-      <Paper shadow="md" radius="lg" p="xl" withBorder>
+      {/* <Paper shadow="md" radius="lg" p="xl" withBorder>
       <h2 style={{textAlign: "center"}}>Shinata фото</h2>
       <Slider {...settings}>
         {images.map((image) => {
           return <img  src={image} key={image}></img>;
         })}
       </Slider>
-      </Paper>
+      </Paper> */}
       </Container>
   );
 };

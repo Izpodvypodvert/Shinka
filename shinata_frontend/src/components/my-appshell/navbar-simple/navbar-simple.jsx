@@ -132,7 +132,7 @@ export function NavbarSimple({ opened, setOpened }) {
       <Navbar.Section grow>
         <Group className={classes.header} position="apart">
           <Text>Телефон</Text>
-          <Code sx={{ fontWeight: 700 }}>+7(901) 429-67-41</Code>
+          <Code sx={{ fontWeight: 700 }}>+7(911) 000-00-00</Code>
         </Group>
         {links}
       </Navbar.Section>

@@ -30,7 +30,7 @@ const useStyles = createStyles((theme) => ({
     background:
       theme.colorScheme === "dark"
         ? theme.colors.dark[8]
-        : theme.colors.orange[8],
+        : theme.colors.red[9],
   },
 
   inner: {
