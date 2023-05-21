@@ -59,7 +59,7 @@ export function MyAppShell({ children }) {
           <Text
             align="center"
             color="dimmed"
-          >{`Shinata ${new Date().getFullYear()}`}</Text>
+          >{`Shinka ${new Date().getFullYear()}`}</Text>
         </Footer>
       }
       header={
