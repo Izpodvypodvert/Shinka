@@ -7,8 +7,8 @@ from rest_framework.relations import SlugRelatedField, PrimaryKeyRelatedField
 
 from django.contrib.auth.hashers import make_password
 
-from shinata.models import (Product, ProductsCategory, Record, Service, Category, Appointment,
-                            Client, AppointmentsManager, ComplexServices)
+from shinata.models import (Product, ProductsCategory, Record, Service, ServiceCategory, Appointment,
+                            Client, AppointmentsManager, ServiceGroup)
 
 
 class RecordSerializer(serializers.ModelSerializer):
@@ -39,7 +39,12 @@ class RecordReadSerializer(serializers.ModelSerializer):
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
-        model = Category
+        model = ServiceCategory
+        fields = '__all__'
+        
+class ServiceGroupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ServiceGroup
         fields = '__all__'
 
 
@@ -55,12 +60,12 @@ class ServiceSerializer(serializers.ModelSerializer):
         fields = '__all__'
  
         
-class ComplexServicesSerializer(serializers.ModelSerializer):
-    services = ServiceSerializer(required=False, many=True)
+# class ComplexServicesSerializer(serializers.ModelSerializer):
+#     services = ServiceSerializer(required=False, many=True)
 
-    class Meta:
-        model = ComplexServices
-        fields = '__all__'
+#     class Meta:
+#         model = ComplexServices
+#         fields = '__all__'
 
 
 class ClientSerializer(serializers.ModelSerializer):

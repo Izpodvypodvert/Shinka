@@ -4,17 +4,18 @@ from django.db.utils import IntegrityError
 from django.conf import settings
 from django.core.management import BaseCommand
 
-from shinata.models import (Category, Client, ComplexServices, Service, ComplexServicesService, Product, ProductsCategory)
+from shinata.models import (ServiceCategory, Client, Service, Product, ProductsCategory, ServiceGroup)
 
 
 TABLES = {
     ProductsCategory: 'productscategory.csv',
     # Client: 'client.csv',
     Product: 'product.csv',
-    Category: 'category.csv',
+    ServiceCategory: 'category.csv',
     Service: 'service.csv',
-    ComplexServices: 'complexservices.csv',
-    ComplexServicesService: 'complexservicesservice.csv'
+    ServiceGroup: 'group.csv'
+    # ComplexServices: 'complexservices.csv',
+    # ComplexServicesService: 'complexservicesservice.csv'
 }
 
 

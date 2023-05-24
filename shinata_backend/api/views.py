@@ -1,4 +1,6 @@
 from django.utils import timezone
+from django_filters.rest_framework import DjangoFilterBackend
+
 from rest_framework import viewsets, filters, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -8,12 +10,12 @@ from rest_framework.exceptions import MethodNotAllowed
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, AllowAny, IsAuthenticated
 
 
-from shinata.models import (Product, ProductsCategory, Record, Service, Category, Appointment,
-                            Client, AppointmentsManager, ComplexServices)
+from shinata.models import (Product, ProductsCategory, Record, Service, ServiceCategory, Appointment,
+                            Client, AppointmentsManager)
 
 from .serializers import (ProductCategorySerializer, ProductSerializer, RecordSerializer, CategorySerializer, AppointmentSerializer, ServiceSerializer,
-                          AppointmentsManagerSerializer, ComplexServicesSerializer, ClientSerializer,
-                          RecordReadSerializer)
+                          AppointmentsManagerSerializer, ServiceGroup, ClientSerializer,
+                          RecordReadSerializer, ServiceGroupSerializer)
 
 from .permissions import IsAdmin, IsAdminOrReadOnly
 
@@ -42,10 +44,15 @@ class RecordViewSet(viewsets.ModelViewSet):
 
 
 class CategoryViewSet(viewsets.ModelViewSet):
-    queryset = Category.objects.all()
+    queryset = ServiceCategory.objects.all()
     serializer_class = CategorySerializer
     permission_classes = [IsAdminOrReadOnly, ]
 
+
+class ServiceGroupViewSet(viewsets.ModelViewSet):
+    queryset = ServiceGroup.objects.all()
+    serializer_class = ServiceGroupSerializer
+    permission_classes = [IsAdminOrReadOnly, ]
 
 class AppointmentViewSet(viewsets.ModelViewSet):
     serializer_class = AppointmentSerializer
@@ -69,6 +76,8 @@ class ServiceViewSet(viewsets.ModelViewSet):
     queryset = Service.objects.all()
     serializer_class = ServiceSerializer
     permission_classes = [IsAdminOrReadOnly, ]
+    filter_backends = (DjangoFilterBackend,)
+    filterset_fields = ('group__title', 'description') 
 
 
 class ClientViewSet(viewsets.ModelViewSet):
@@ -110,10 +119,10 @@ class AppointmentsManagerView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class ComplexServicesViewSet(viewsets.ModelViewSet):
-    queryset = ComplexServices.objects.all()
-    serializer_class = ComplexServicesSerializer
-    permission_classes = [IsAdminOrReadOnly, ]
+# class ComplexServicesViewSet(viewsets.ModelViewSet):
+#     queryset = ComplexServices.objects.all()
+#     serializer_class = ComplexServicesSerializer
+#     permission_classes = [IsAdminOrReadOnly, ]
     
 
 class ProductCategoryView(APIView):

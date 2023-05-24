@@ -7,8 +7,8 @@ from django.urls import include, path, re_path, register_converter
 from api.utils import DateConverter
 
 from .views import (ApointmentView, RecordViewSet, CategoryViewSet, AppointmentViewSet, ServiceViewSet,
-                    ClientViewSet, AppointmentsManagerView, ComplexServicesViewSet, ProductCategoryView,
-                    ProductView, ProductListView)
+                    ClientViewSet, AppointmentsManagerView, ProductCategoryView,
+                    ProductView, ProductListView, ServiceGroupViewSet)
 
 
 app_name = 'posts'
@@ -18,8 +18,9 @@ router_v1.register(r'records', RecordViewSet)
 router_v1.register(r'categories', CategoryViewSet)
 router_v1.register(r'appointments', AppointmentViewSet, basename='appointment')
 router_v1.register(r'services', ServiceViewSet)
-router_v1.register(r'complex', ComplexServicesViewSet)
+# router_v1.register(r'complex', ComplexServicesViewSet)
 router_v1.register(r'clients', ClientViewSet)
+router_v1.register(r'service-groups', ServiceGroupViewSet)
 
 register_converter(DateConverter, 'my_date')
 

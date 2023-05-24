@@ -96,7 +96,7 @@ class AppointmentsManager(models.Model):
         verbose_name_plural = 'Управление назначениями'
 
 
-class Category(models.Model):
+class ServiceCategory(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True)
     description = models.TextField()
@@ -107,6 +107,23 @@ class Category(models.Model):
     class Meta:
         verbose_name = 'Категория услуг'
         verbose_name_plural = 'Категории услуг'
+        
+        
+class ServiceGroup(models.Model):
+    title = models.CharField(max_length=200)
+    slug = models.SlugField(unique=True)
+    description = models.TextField()
+    category = models.ForeignKey(
+        ServiceCategory, on_delete=models.SET_NULL,
+        related_name='groups', blank=True, null=True
+    )
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Группа услуг'
+        verbose_name_plural = 'Группа услуг'
 
 
 class Service(models.Model):
@@ -117,40 +134,44 @@ class Service(models.Model):
     price = models.DecimalField(
         max_digits=7, decimal_places=2, null=True, blank=True)
     category = models.ForeignKey(
-        Category, on_delete=models.SET_NULL,
+        ServiceCategory, on_delete=models.SET_NULL,
+        related_name='services', blank=True, null=True
+    )
+    group = models.ForeignKey(
+        ServiceGroup, on_delete=models.SET_NULL,
         related_name='services', blank=True, null=True
     )
     description = models.TextField()
 
     def __str__(self):
-        return self.title
+        return f'{self.title} {self.description[:25]} {self.group.title} {self.price}'
 
     class Meta:
         verbose_name = 'Услуга'
         verbose_name_plural = 'Услуги'
 
 
-class ComplexServices(models.Model):
-    title = models.CharField(max_length=200)
-    created = models.DateTimeField(
-        'Дата создания услуги', auto_now_add=True
-    )
-    price = models.DecimalField(
-        max_digits=7, decimal_places=2, null=True, blank=True)
-    category = models.ForeignKey(
-        Category, on_delete=models.SET_NULL,
-        related_name='complex_services', blank=True, null=True
-    )
-    description = models.TextField()
-    services = models.ManyToManyField(
-        Service, through='ComplexServicesService')
+# class ComplexServices(models.Model):
+#     title = models.CharField(max_length=200)
+#     created = models.DateTimeField(
+#         'Дата создания услуги', auto_now_add=True
+#     )
+#     price = models.DecimalField(
+#         max_digits=7, decimal_places=2, null=True, blank=True)
+#     category = models.ForeignKey(
+#         Category, on_delete=models.SET_NULL,
+#         related_name='complex_services', blank=True, null=True
+#     )
+#     description = models.TextField()
+#     services = models.ManyToManyField(
+#         Service, through='ComplexServicesService')
 
-    def __str__(self):
-        return self.title
+#     def __str__(self):
+#         return self.title
 
-    class Meta:
-        verbose_name = 'Комплексная услуга'
-        verbose_name_plural = 'Комплексные услуги'
+#     class Meta:
+#         verbose_name = 'Комплексная услуга'
+#         verbose_name_plural = 'Комплексные услуги'
 
 
 class Record(models.Model):
@@ -163,8 +184,8 @@ class Record(models.Model):
     )
     expired = models.BooleanField(default=False)
     services = models.ManyToManyField(Service, through='RecordService')
-    complex_services = models.ManyToManyField(
-        ComplexServices, through='ComplexServicesRecord')
+    # complex_services = models.ManyToManyField(
+    #     ComplexServices, through='ComplexServicesRecord')
     appointment = models.OneToOneField(
         Appointment, on_delete=models.DO_NOTHING)
 
@@ -204,26 +225,26 @@ class RecordService(models.Model):
         verbose_name_plural = 'Услуги'
 
 
-class ComplexServicesRecord(models.Model):
-    complex_services = models.ForeignKey(
-        ComplexServices, on_delete=models.CASCADE)
-    record = models.ForeignKey(Record, on_delete=models.CASCADE)
+# class ComplexServicesRecord(models.Model):
+#     complex_services = models.ForeignKey(
+#         ComplexServices, on_delete=models.CASCADE)
+#     record = models.ForeignKey(Record, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return f'{self.complex_services} {self.record}'
+#     def __str__(self):
+#         return f'{self.complex_services} {self.record}'
 
-    class Meta:
-        verbose_name = 'Комплексная услуга'
-        verbose_name_plural = 'Комплексные услуги'
+#     class Meta:
+#         verbose_name = 'Комплексная услуга'
+#         verbose_name_plural = 'Комплексные услуги'
 
 
-class ComplexServicesService(models.Model):
-    complex_services = models.ForeignKey(
-        ComplexServices, on_delete=models.CASCADE)
-    service = models.ForeignKey(Service, on_delete=models.CASCADE)
+# class ComplexServicesService(models.Model):
+#     complex_services = models.ForeignKey(
+#         ComplexServices, on_delete=models.CASCADE)
+#     service = models.ForeignKey(Service, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return f'{self.complex_services} {self.service}'
+#     def __str__(self):
+#         return f'{self.complex_services} {self.service}'
 
 
 class ProductsCategory(models.Model):

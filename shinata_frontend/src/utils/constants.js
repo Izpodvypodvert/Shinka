@@ -2,9 +2,9 @@ export const BASE_URL = "http://www.izpodvypodverta.ru"
 
 export const URL = `${BASE_URL}/api/v1`;
 
-// export const BASE_URL = "http://127.0.0.1"
+// export const BASE_URL = "http://127.0.0.1:8000"
 
-// export const URL = "http://127.0.0.1/api/v1";
+// export const URL = `${BASE_URL}/api/v1`;
 
 export const settings = {
     dots: true,

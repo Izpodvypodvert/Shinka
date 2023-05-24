@@ -82,6 +82,16 @@ const checkResponse = (res) => {
     }).then(checkResponse);
   };
 
+  export const getServiceGroups = () => {
+    return fetch(`${URL}/service-groups/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        // authorization: `Token ${localStorage.getItem("auth_token")}`,
+      },
+    }).then(checkResponse);
+  };
+
   export const makeRecord = (userId, appointmentId) => {
     return fetch(`${URL}/records/`, {
       method: "POST",
@@ -139,8 +149,18 @@ const checkResponse = (res) => {
     }).then(checkResponse);
   };
 
-  export const getComplexServices = () => {
-    return fetch(`${URL}/complex/`, {
+  // export const getComplexServices = () => {
+  //   return fetch(`${URL}/complex/`, {
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       // authorization: `Token ${localStorage.getItem("auth_token")}`,
+  //     },
+  //   }).then(checkResponse);
+  // };
+
+  export const getServices = (carType, wheelDiameter) => {
+    return fetch(`${URL}/services/?group__title=${carType}&description=${wheelDiameter}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -148,6 +168,7 @@ const checkResponse = (res) => {
       },
     }).then(checkResponse);
   };
+
 
   export const getSearchedProducts = (searchValue) => {
     return fetch(`${URL}/searched-products?search=${searchValue}`, {

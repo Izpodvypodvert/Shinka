@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rangefilter',
     'rest_framework',
+    'django_filters', 
     'rest_framework.authtoken',
     'corsheaders',
     'drf_yasg',
