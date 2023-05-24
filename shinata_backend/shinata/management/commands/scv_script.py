@@ -12,8 +12,8 @@ TABLES = {
     # Client: 'client.csv',
     Product: 'product.csv',
     ServiceCategory: 'category.csv',
-    Service: 'service.csv',
-    ServiceGroup: 'group.csv'
+    ServiceGroup: 'group.csv',
+    Service: 'service.csv',  
     # ComplexServices: 'complexservices.csv',
     # ComplexServicesService: 'complexservicesservice.csv'
 }
@@ -30,10 +30,10 @@ class Command(BaseCommand):
                     encoding='utf-8'
             ) as csv_file:
                 reader = csv.DictReader(csv_file)
-                try:
-                    model.objects.bulk_create(
-                        model(**data) for data in reader)
-                except IntegrityError:
-                    self.stdout.write(self.style.ERROR_OUTPUT('данные уже были загружены! Или ошибки в csv файлах!'))
-                    continue
+                # try:
+                model.objects.bulk_create(
+                    model(**data) for data in reader)
+                # except IntegrityError:
+                #     self.stdout.write(self.style.ERROR_OUTPUT('данные уже были загружены! Или ошибки в csv файлах!'))
+                #     continue
         self.stdout.write(self.style.SUCCESS('Все данные загружены'))
