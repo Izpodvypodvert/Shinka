@@ -8,7 +8,7 @@ from api.utils import DateConverter
 
 from .views import (ApointmentView, RecordViewSet, CategoryViewSet, AppointmentViewSet, ServiceViewSet,
                     ClientViewSet, AppointmentsManagerView, ProductCategoryView,
-                    ProductView, ProductListView, ServiceGroupViewSet)
+                    ProductView, ProductListView, ServiceGroupViewSet, FAQView)
 
 
 app_name = 'posts'
@@ -32,7 +32,8 @@ urlpatterns = [
     path('v1/appointments_manager/', AppointmentsManagerView.as_view()),
     path('v1/products-category/', ProductCategoryView.as_view()),
     path('v1/products/<int:productcategoryid>/', ProductView.as_view()),
-    path('v1/searched-products/', ProductListView.as_view())
+    path('v1/searched-products/', ProductListView.as_view()),
+    path('v1/faq/', FAQView.as_view())
 ]
 
 

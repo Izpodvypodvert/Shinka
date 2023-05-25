@@ -11,11 +11,11 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly, AllowAny, IsAu
 
 
 from shinata.models import (Product, ProductsCategory, Record, Service, ServiceCategory, Appointment,
-                            Client, AppointmentsManager)
+                            Client, AppointmentsManager, FAQ)
 
 from .serializers import (ProductCategorySerializer, ProductSerializer, RecordSerializer, CategorySerializer, AppointmentSerializer, ServiceSerializer,
                           AppointmentsManagerSerializer, ServiceGroup, ClientSerializer,
-                          RecordReadSerializer, ServiceGroupSerializer)
+                          RecordReadSerializer, ServiceGroupSerializer, FAQSerializer)
 
 from .permissions import IsAdmin, IsAdminOrReadOnly
 
@@ -150,3 +150,14 @@ class ProductListView(ListAPIView):
     serializer_class = ProductSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ['brand', 'description']
+
+
+
+class FAQView(APIView):
+    permission_classes = [IsAdminOrReadOnly, ]
+    
+    def get(self, request):
+        faqs = FAQ.objects.all()
+        serializer = FAQSerializer(faqs, many=True)
+        return Response(serializer.data)
+    

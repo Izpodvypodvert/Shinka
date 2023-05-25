@@ -8,7 +8,7 @@ from rest_framework.relations import SlugRelatedField, PrimaryKeyRelatedField
 from django.contrib.auth.hashers import make_password
 
 from shinata.models import (Product, ProductsCategory, Record, Service, ServiceCategory, Appointment,
-                            Client, AppointmentsManager, ServiceGroup)
+                            Client, AppointmentsManager, ServiceGroup, FAQ)
 
 
 class RecordSerializer(serializers.ModelSerializer):
@@ -117,3 +117,8 @@ class ProductCategorySerializer(serializers.ModelSerializer):
         
         
 
+class FAQSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FAQ
+        fields = '__all__'
+        

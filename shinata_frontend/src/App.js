@@ -16,7 +16,6 @@ import {
   Paper,
   MantineProvider,
   ColorSchemeProvider,
-  
 } from "@mantine/core";
 import { useLocalStorage } from '@mantine/hooks';
 
@@ -29,6 +28,8 @@ function App() {
     defaultValue: 'light',
     getInitialValueInEffect: true,
   });
+
+ 
 
   const toggleColorScheme = (value) =>
     setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
@@ -57,9 +58,10 @@ function App() {
       toggleColorScheme={toggleColorScheme}
     >
       <MantineProvider
-        theme={{ colorScheme }}
+        theme={{colorScheme}}
         withGlobalStyles
         withNormalizeCSS
+
       >
         <UserContext.Provider value={[userState, setUserState]}>
           <Paper>

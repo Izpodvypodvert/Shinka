@@ -4,7 +4,7 @@ from django.contrib import admin
 
 from django.utils.timezone import now
 from shinata.models import (Record, Service, ServiceCategory, Appointment, Client, RecordService, ProductsCategory, Product,
-                            AppointmentsManager, ServiceGroup)
+                            AppointmentsManager, ServiceGroup, FAQ)
 
 from rangefilter.filters import DateRangeFilterBuilder
 from shinata.forms import CustomUserCreationForm, CustomUserChangeForm
@@ -89,3 +89,4 @@ admin.site.register(Appointment, AppointmentAdmin)
 # admin.site.register(Client, UserAdmin)
 admin.site.register(AppointmentsManager)
 admin.site.register(ServiceGroup)
+admin.site.register(FAQ)

@@ -21,12 +21,12 @@ import {
 
 import { registerUser } from "../../utils/api";
 
-
 export const SignUp = () => {
   const [userData, setUserData] = React.useState({});
   const [errorDoublePassword, setErrorDoublePassword] = React.useState("");
   const [errorPassword, setErrorPassword] = React.useState("");
   const [errorLogin, setErrorLogin] = React.useState("");
+  const [errorPhone, setErrorPhone] = React.useState("");
 
   const navigate = useNavigate();
 
@@ -42,8 +42,8 @@ export const SignUp = () => {
       setErrorLogin("Поле с именем является обязательным");
       return false;
     }
-    if (!userData.password) {
-      setErrorPassword("Поле с паролем является обязательным");
+    if (userData.password.length < 7)  {
+      setErrorPassword("Пароль должен содержать минимум 8 символов");
       return false;
     }
     if (!userData.password2) {
@@ -54,6 +54,17 @@ export const SignUp = () => {
       setErrorDoublePassword("Пароли не совпадают!");
       return false;
     }
+    if (!/^(\+7|7|8)[0-9]{10}$/.test(userData.phone)) {
+      setErrorPhone("Неправильно указан номер телефона!");
+      return false;
+    }
+    
+    // if (userData.phone.length != 12) {
+    //   setUserData({
+    //     ...userData,
+    //     phone: userData.phone.replace(phone[0], '+7'),
+    //   });
+    // }
     return true;
   };
 
@@ -61,13 +72,14 @@ export const SignUp = () => {
     errorDoublePassword && setErrorDoublePassword("");
     errorLogin && setErrorLogin("");
     errorPassword && setErrorPassword("");
+    errorPhone && setErrorPhone("");
 
     checkValid() &&
       registerUser(
         userData.username,
         userData.password,
         userData.email,
-        userData.phone,
+        userData.phone.length == 12 ? userData.phone : userData.phone.replace(userData.phone[0], '+7'),
         userData.car_brand,
         userData.car_model
       )
@@ -89,74 +101,73 @@ export const SignUp = () => {
         });
   };
 
-
-
   return (
     <Box maw={340} mx="auto">
       <Paper shadow="md" radius="lg" p="xl" withBorder>
-      <Center h={150}>
-        <ThemeIcon color="white" size={90}>
-          <img src={logoIcon} alt="Логотип." width={90} height={90} />
-        </ThemeIcon>
-      </Center>
-      <Text color="dimmed">
-        Зарегистрируйтесь для получения доступа к записи на шиномонтаж!
-      </Text>
+        <Center h={150}>
+          <ThemeIcon color="white" size={90}>
+            <img src={logoIcon} alt="Логотип." width={90} height={90} />
+          </ThemeIcon>
+        </Center>
+        <Text color="dimmed">
+          Зарегистрируйтесь для получения доступа к записи на шиномонтаж!
+        </Text>
 
-      <TextInput
-        mt="sm"
-        label="Имя пользователя:"
-        placeholder="Имя пользователя"
-        onChange={onChangeInput}
-        name="username"
-        error={errorLogin}
-      />
+        <TextInput
+          mt="sm"
+          label="Имя пользователя:"
+          placeholder="Имя пользователя"
+          onChange={onChangeInput}
+          name="username"
+          error={errorLogin}
+        />
 
-      <PasswordInput
-        label="Пароль:"
-        placeholder="Пароль"
-        onChange={onChangeInput}
-        name="password"
-        error={errorPassword}
-      />
-      <PasswordInput
-        label="Повторите пароль:"
-        placeholder="Повторите пароль"
-        onChange={onChangeInput}
-        name="password2"
-        error={errorDoublePassword}
-      />
-      <TextInput
-        label="Номер телефона:"
-        placeholder="Номер телефона"
-        onChange={onChangeInput}
-        name="phone"
-      />
-      <TextInput
-        label="Электронная почта:"
-        placeholder="Электронная почта"
-        onChange={onChangeInput}
-        name={"email"}
-      />
-      <TextInput
-        label="Марка авто:"
-        placeholder="Марка авто"
-        onChange={onChangeInput}
-        name={"car_brand"}
-      />
-      <TextInput
-        label="Модель авто:"
-        placeholder="Модель авто"
-        onChange={onChangeInput}
-        name={"car_model"}
-      />
-      <Group position="right" mt="md">
-        <Button onClick={handleSubmit}>Зарегистрироваться</Button>
-      </Group>
+        <PasswordInput
+          label="Пароль:"
+          placeholder="Пароль"
+          onChange={onChangeInput}
+          name="password"
+          error={errorPassword}
+        />
+        <PasswordInput
+          label="Повторите пароль:"
+          placeholder="Повторите пароль"
+          onChange={onChangeInput}
+          name="password2"
+          error={errorDoublePassword}
+        />
+        <TextInput
+          label="Номер телефона:"
+          placeholder="Номер телефона"
+          onChange={onChangeInput}
+          name="phone"
+          error={errorPhone}
+        />
+        <TextInput
+          label="Электронная почта:"
+          placeholder="Электронная почта"
+          onChange={onChangeInput}
+          name={"email"}
+        />
+        <TextInput
+          label="Марка авто:"
+          placeholder="Марка авто"
+          onChange={onChangeInput}
+          name={"car_brand"}
+        />
+        <TextInput
+          label="Модель авто:"
+          placeholder="Модель авто"
+          onChange={onChangeInput}
+          name={"car_model"}
+        />
+        <Group position="right" mt="md">
+          <Button onClick={handleSubmit}>Зарегистрироваться</Button>
+        </Group>
 
-      <Space h={30} />
-      <Text color="dimmed">или</Text>
-      <NavLink to="/signin">Уже зарегистрированы? Войти</NavLink>
+        <Space h={30} />
+        <Text color="dimmed">или</Text>
+        <NavLink to="/signin">Уже зарегистрированы? Войти</NavLink>
       </Paper>
     </Box>
   );

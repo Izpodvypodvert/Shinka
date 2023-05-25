@@ -291,3 +291,15 @@ class Product(models.Model):
     def __str__(self):
         return f'{self.brand} {self.description}'
     
+    
+class FAQ(models.Model):
+    question = models.CharField('Вопрос', max_length=250)
+    answer = models.TextField('Ответ')
+    
+    class Meta:
+        verbose_name = 'Часто задаваемые вопросы'
+        
+    def __str__(self):
+        return f'{self.question}'
+    
+     

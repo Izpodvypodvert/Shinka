@@ -9,18 +9,25 @@ import {
   Container,
   Text,
   Paper,
+  SimpleGrid,
+  Title,
 } from "@mantine/core";
 import { DatePicker } from "@mantine/dates";
 
 import { UserContext } from "../../utils/context";
 import { getAppointments } from "../../utils/api";
-import { formatDateTimeToTime, formatDateTimeToDate } from "../../utils/utils";
+import {
+  formatDateTimeToTime,
+  formatDateTimeToDate,
+  formatDateTimeToRuDate,
+} from "../../utils/utils";
 import { makeRecord } from "../../utils/api";
 
 import { MdAlarmOn, MdAlarmOff } from "react-icons/md";
 import { GiNotebook } from "react-icons/gi";
 
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
+import { useNavigate, NavLink } from "react-router-dom";
 
 
 export const Record = () => {
@@ -32,7 +39,8 @@ export const Record = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const [message, setMessage] = React.useState("");
 
-  const largeScreen = useMediaQuery("(min-width: 60em)");  
+  const largeScreen = useMediaQuery("(min-width: 60em)");
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     getAppointments(date)
@@ -51,20 +59,19 @@ export const Record = () => {
 
   function handleRecord(userId, appointmentId) {
     if (!userId) {
-        setMessage("Необходимо войти в систему или зарегистрироваться.")
-        open();
-        return
+      setMessage("Необходимо войти в систему или зарегистрироваться.");
+      open();
+      return;
     }
-    
+
     makeRecord(userId, appointmentId).catch((err) => setMessage(err?.[0]));
-    
+
     if (message?.length == 0) {
       setMessage("Вы успешно записаны на шиномонтаж.");
+      navigate('/profile')
     }
     open();
   }
-
-
 
   return (
     <Container>
@@ -72,15 +79,21 @@ export const Record = () => {
         {message}
       </Modal>
       <Paper shadow="md" radius="lg" p="xl" withBorder>
-        <Text fz={20} fw={800} ta="center">
-          Выберите день: {formatDateTimeToDate(date)}
-        </Text>
-        <Space h={20} />
+        <Title
+          align="center"
+          order={3}
+          variant="gradient"
+          gradient={{ from: "red", to: "blue", deg: 138 }}
+          size="h3"
+        >
+          Выберите день: {formatDateTimeToRuDate(date)}
+        </Title>
+        <Space h={10} />
         <Group position="center">
           <DatePicker
             numberOfColumns={largeScreen ? 2 : 1}
             locale="ru"
-            size="lg"
+            size={largeScreen ? "lg" : "md"}
             value={date}
             onChange={setDate}
             minDate={new Date()}
@@ -89,11 +102,18 @@ export const Record = () => {
       </Paper>
       <Space h="xl" />
       <Paper shadow="md" radius="lg" p="xl" withBorder>
-        <Text fz={20} fw={800} ta="center">
+        <Title
+          align="center"
+          order={3}
+          variant="gradient"
+          gradient={{ from: "red", to: "blue", deg: 138 }}
+          size="h3"
+        >
           Выберите время: {appointmentTime}
-        </Text>
-        <Space h={20} />
-        <Group position="center">
+        </Title>
+        <Space h={10} />
+        <Group position="apart" spacing="xs">
+          {/* <SimpleGrid cols={largeScreen ? 6 : 3}> */}
           {appointments.map((appoint, index) => {
             return appoint.reserved || appoint.expired ? (
               <Button
@@ -101,6 +121,7 @@ export const Record = () => {
                 key={appoint.id}
                 radius="md"
                 leftIcon=<MdAlarmOff />
+                size={largeScreen ? "sm" : 16}
               >
                 {formatDateTimeToTime(appoint.dt)}
               </Button>
@@ -109,15 +130,17 @@ export const Record = () => {
                 key={appoint.id}
                 leftIcon=<MdAlarmOn />
                 radius="md"
+                size={largeScreen ? "sm" : 16}
                 onClick={() => handleSelectTime(appoint.id, appoint.dt)}
               >
                 {formatDateTimeToTime(appoint.dt)}
               </Button>
             );
           })}
+          {/* </SimpleGrid> */}
         </Group>
       </Paper>
-      <Space h={40} />
+      <Space h={25} />
       <Group position="center">
         <Button
           onClick={() => handleRecord(user.id, appointmentId)}

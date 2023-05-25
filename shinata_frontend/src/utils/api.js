@@ -179,3 +179,13 @@ const checkResponse = (res) => {
       },
     }).then(checkResponse);
   };
+
+  export const getFAQ = (searchValue) => {
+    return fetch(`${URL}/faq/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        // authorization: `Token ${localStorage.getItem("auth_token")}`,
+      },
+    }).then(checkResponse);
+  };

@@ -12,43 +12,61 @@ import {
   SimpleGrid,
   Container,
   createStyles,
+  Center,
   rem,
+  Space
 } from "@mantine/core";
 import { FcApproval } from "react-icons/fc";
 import { useMediaQuery } from "@mantine/hooks";
 
+
 const useStyles = createStyles((theme) => ({
   card: {
-    backgroundColor:
-      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
+    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
     position: "relative",
-    minHeight: "500px",
-    minWidth: "250px",
+    // minHeight: "500px",
+    // width: "auto",
+    // maxWidth: "100%",
+    // maxWidth: "300px"
+    maxHeight: "500px",
+    maxWidth: "250px"
+    
   },
 
   imageSection: {
     padding: theme.spacing.xs,
+    // alignItems: 'stretch',
+    // justifyContent: 'center',
     borderBottom: `${rem(1)} solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
+      theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
     }`,
+  },
+
+  label: {
+    marginBottom: theme.spacing.xs,
+    lineHeight: 1,
+    fontWeight: 700,
+    fontSize: theme.fontSizes.xs,
+    letterSpacing: rem(-0.25),
+    textTransform: 'uppercase',
   },
 
   section: {
     position: "absolute",
     bottom: 0,
-    marginLeft:"10px",
-    // margin: "auto",
+    margin: "auto",
+    // left: '25%',
+    
     padding: theme.spacing.md,
     borderTop: `${rem(1)} solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
+      theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
     }`,
   },
 
   btn: {
-    color:
-      theme.colorScheme === "dark"
-        ? theme.colors.dark[2]
-        : theme.colors.gray[5],
+    position: "absolute",
+    // bottom:0,
+    color: theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[5],
   },
 }));
 
@@ -96,21 +114,12 @@ export const Products = () => {
             value={category.id.toString()}
             pt="xs"
           >
-            <Container size="lg">
-              <SimpleGrid
-                cols={largeScreen ? 4 : 1}
-                key={category.id}
-                breakpoints={[
-                  { maxWidth: "62rem", cols: 3, spacing: "md" },
-                  { maxWidth: "48rem", cols: 2, spacing: "sm" },
-                  { maxWidth: "36rem", cols: 1, spacing: "sm" },
-                ]}
-              >
-              
+            <Container>
+              <SimpleGrid cols={largeScreen ? 4 : 2} key={category.id}>
                 {products.map((product) => {
                   return (
                     <Card
-                      className={classes.card}
+                    className={classes.card}
                       sx={{
                         "&:hover": {
                           border: "2px solid #3E7DC0",
@@ -124,26 +133,23 @@ export const Products = () => {
                       key={product.id}
                     >
                       <Card.Section className={classes.imageSection}>
-                        <Image
-                          src={BASE_URL + product.image}
-                          alt="автотовар"
-                          height={300}
-                        />
+                        <Image src={BASE_URL + product.image} alt="автотовар" height={300}/>
                       </Card.Section>
-
-                      <Text weight={500}>{product.brand}</Text>
+              
+                      <Text weight={500}>{product.brand}</Text> 
                       <Card.Section className={classes.section}>
-                        <Group position="apart" mb="xs">
-                          <Badge color="pink" variant="light">
-                            распродажа
-                          </Badge>
+                      <Group position="apart" mb="xs">
+                        
+                        <Badge color="pink" variant="light">
+                          распродажа
+                        </Badge>
 
-                          {/* <Card.Section>  */}
-                          <Text size="sm" color="dimmed">
-                            {product.description}
-                          </Text>
+                        {/* <Card.Section>  */}
+                        <Text size="sm" color="dimmed">
+                          {product.description}
+                        </Text>
                         </Group>
-
+                        
                         {/* <Space h={15} /> */}
                         <Button
                           // className={classes.btn}
@@ -155,12 +161,11 @@ export const Products = () => {
                         >
                           {product.price} руб.
                         </Button>
-                      </Card.Section>
+                        </Card.Section>
                     </Card>
                   );
                 })}
               </SimpleGrid>
-              
             </Container>
           </Tabs.Panel>
         );
