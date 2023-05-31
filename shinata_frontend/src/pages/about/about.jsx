@@ -17,7 +17,3 @@ export const About = () => {
     </Container>
   );
 }
-
-
-
-// https://yandex.ru/map-widget/v1/?um=constructor%3Acf43dd8b6147a68bbd1c5e76b6f78f0aea7936a261c49b3999f613fc866e46b1&amp;source=constructor

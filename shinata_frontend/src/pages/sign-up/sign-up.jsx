@@ -59,12 +59,6 @@ export const SignUp = () => {
       return false;
     }
     
-    // if (userData.phone.length != 12) {
-    //   setUserData({
-    //     ...userData,
-    //     phone: userData.phone.replace(phone[0], '+7'),
-    //   });
-    // }
     return true;
   };
 

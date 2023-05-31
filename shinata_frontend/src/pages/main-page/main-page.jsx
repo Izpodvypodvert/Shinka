@@ -21,17 +21,14 @@ import {
   createStyles,
   Accordion,
 } from "@mantine/core";
-import { GiCartwheel } from "react-icons/gi";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { settings } from "../../utils/constants";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 
 const useStyles = createStyles((theme) => ({
   paper: {
     backgroundColor:
       theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.colors.red[0],
-    // theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
     marginBottom: "20px",
   },
 }));
@@ -126,7 +123,6 @@ export const MainPage = () => {
             value={carType}
             onChange={(event) => setCarType(event.currentTarget.value)}
             label="Тип автомобиля"
-            // description="Тип автомобиля"
             radius="md"
             size={largeScreen ? "xl" : "xs"}
             withAsterisk
@@ -168,7 +164,6 @@ export const MainPage = () => {
         <Group position="center">
           <Button
             onClick={() => handleRecord(carType, wheelDiameter)}
-            // leftIcon=<GiNotebook />
             color="red"
             size="xl"
             radius="lg"
@@ -235,59 +230,3 @@ export const MainPage = () => {
     </Container>
   );
 };
-
-{
-  /* <Group position="center" spacing="xs">
-      
-      {groups.map((group, index) => {
-        return (
-          <Card
-            sx={{ width: "300px", height: "550px" }}
-            shadow="sm"
-            padding="lg"
-            radius="md"
-            withBorder
-            key={group.id}
-          >
-            <Card.Section>
-              <Image src={complexServiesImages[index]} alt="complex" />
-            </Card.Section>
-            <Text weight={500}>{group.title}</Text>
-            <Text size="sm" color="dimmed">
-              {group.description}
-            </Text>
-            <Space h={20}/>
-            <List spacing="xs" size="sm" icon={<GiCartwheel />}>
-              {group.services.map((service) => {
-                return (
-                  <div style={{textAlign:'left', padding: '0 20px 10px'}} key={service.id}>
-                  <List.Item key={service.id}>{service.title}</List.Item>
-                  </div>
-                );
-              })}
-            </List>
-           
-            <Button
-              sx={{ position: "absolute", bottom: 0 }}
-              variant="light"
-              color="blue"
-              fullWidth
-              mt="md"
-              radius="md"
-            >
-              {/* {complexService.price} руб. */
-}
-//         </Button>
-//       </Card>
-//     );
-//   })}
-// </Group>
-
-// <Paper shadow="md" radius="lg" p="xl" withBorder>
-// <h2 style={{textAlign: "center"}}>Shinata фото</h2>
-// <Slider {...settings}>
-//   {images.map((image) => {
-//     return <img  src={image} key={image}></img>;
-//   })}
-// </Slider>
-// </Paper> */}

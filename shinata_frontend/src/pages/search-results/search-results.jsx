@@ -37,7 +37,6 @@ const useStyles = createStyles((theme) => ({
     position: "absolute",
     bottom: 0,
     marginLeft: "10px",
-    // margin: "auto",
     padding: theme.spacing.md,
     borderTop: `${rem(1)} solid ${
       theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
@@ -74,11 +73,7 @@ export const SearchResults = () => {
     });
   }, [searchValue]);
 
-  // React.useEffect(() => {
-  //   getSearchedProducts(searchValue).then((res) => setSearchedProducts(res));
-
-  // }, [searchValue])
-
+  
   return (
     <Container size="lg">
       {searchedProducts.length == 0 && (

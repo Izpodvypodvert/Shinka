@@ -37,7 +37,6 @@ const useStyles = createStyles((theme) => ({
     position: "absolute",
     bottom: 0,
     marginLeft:"10px",
-    // margin: "auto",
     padding: theme.spacing.md,
     borderTop: `${rem(1)} solid ${
       theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
@@ -137,16 +136,11 @@ export const Products = () => {
                           <Badge color="pink" variant="light">
                             распродажа
                           </Badge>
-
-                          {/* <Card.Section>  */}
                           <Text size="sm" color="dimmed">
                             {product.description}
                           </Text>
                         </Group>
-
-                        {/* <Space h={15} /> */}
                         <Button
-                          // className={classes.btn}
                           variant="light"
                           color="blue"
                           fullWidth

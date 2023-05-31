@@ -42,3 +42,4 @@ urllib3==1.26.15
 gunicorn
 whitenoise
 django-filter
+django-environ

@@ -134,7 +134,6 @@ const checkResponse = (res) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        // authorization: `Token ${localStorage.getItem("auth_token")}`,
       },
     }).then(checkResponse);
   };
@@ -144,27 +143,16 @@ const checkResponse = (res) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        // authorization: `Token ${localStorage.getItem("auth_token")}`,
       },
     }).then(checkResponse);
   };
 
-  // export const getComplexServices = () => {
-  //   return fetch(`${URL}/complex/`, {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       // authorization: `Token ${localStorage.getItem("auth_token")}`,
-  //     },
-  //   }).then(checkResponse);
-  // };
 
   export const getServices = (carType, wheelDiameter) => {
     return fetch(`${URL}/services/?group__title=${carType}&description=${wheelDiameter}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        // authorization: `Token ${localStorage.getItem("auth_token")}`,
       },
     }).then(checkResponse);
   };
@@ -175,7 +163,6 @@ const checkResponse = (res) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        // authorization: `Token ${localStorage.getItem("auth_token")}`,
       },
     }).then(checkResponse);
   };
@@ -185,7 +172,6 @@ const checkResponse = (res) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        // authorization: `Token ${localStorage.getItem("auth_token")}`,
       },
     }).then(checkResponse);
   };

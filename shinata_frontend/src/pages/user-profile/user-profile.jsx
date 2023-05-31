@@ -1,26 +1,21 @@
 import React from "react";
 import { UserContext } from "../../utils/context";
 
-import { useNavigate, NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { updateUser, getRecord, deleteRecord } from "../../utils/api";
 import logoIcon from "../../images/logo.svg";
 import { formatDateTimeToRuDate } from "../../utils/utils";
 import {
   ThemeIcon,
-  MediaQuery,
-  useMantineColorScheme,
-  ActionIcon,
   Button,
   Box,
-  PasswordInput,
   Group,
   Text,
   Center,
   Space,
   TextInput,
   Paper,
-  Card,
   Title,
   Modal,
 } from "@mantine/core";
@@ -86,7 +81,6 @@ export const UserProfile = ({ extraClass = "" }) => {
               >
                 Вы записаны на шиномонтаж:
                 <br />
-                {/* .replace("T", " ").slice(0, -3)) */}
                 {formatDateTimeToRuDate(new Date(record.appointment))}
               </Title>
               <Space h={50} />

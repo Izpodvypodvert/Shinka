@@ -7,9 +7,7 @@ import {
   Button,
   Modal,
   Container,
-  Text,
   Paper,
-  SimpleGrid,
   Title,
 } from "@mantine/core";
 import { DatePicker } from "@mantine/dates";
@@ -18,7 +16,6 @@ import { UserContext } from "../../utils/context";
 import { getAppointments } from "../../utils/api";
 import {
   formatDateTimeToTime,
-  formatDateTimeToDate,
   formatDateTimeToRuDate,
 } from "../../utils/utils";
 import { makeRecord } from "../../utils/api";
@@ -27,7 +24,7 @@ import { MdAlarmOn, MdAlarmOff } from "react-icons/md";
 import { GiNotebook } from "react-icons/gi";
 
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
-import { useNavigate, NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 export const Record = () => {
@@ -113,7 +110,6 @@ export const Record = () => {
         </Title>
         <Space h={10} />
         <Group position="apart" spacing="xs">
-          {/* <SimpleGrid cols={largeScreen ? 6 : 3}> */}
           {appointments.map((appoint, index) => {
             return appoint.reserved || appoint.expired ? (
               <Button
@@ -137,7 +133,6 @@ export const Record = () => {
               </Button>
             );
           })}
-          {/* </SimpleGrid> */}
         </Group>
       </Paper>
       <Space h={25} />
