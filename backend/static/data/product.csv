@@ -1,0 +1,59 @@
+id,brand,price,description,image,in_stock,product_category_id
+1,Масло моторное G-Energy Synthetic Active 5W-30,725,1 л,shinka/product0.png,1,1
+2,Масло моторное Gazpromneft ATF DX II,1576,4 л,shinka/product1.png,1,1
+3,Масло моторное Gazpromneft ATF DX III,2058,4 л,shinka/product2.png,1,1
+4,Масло моторное Gazpromneft GL-4 80W-85,1561,4 л,shinka/product3.png,1,1
+5,Масло моторное G-Energy Synthetic Active 5W-40,727,1 л,shinka/product4.png,1,1
+6,Масло моторное G-Energy Synthetic Far East 5W-30,758,1 л,shinka/product5.png,1,1
+7,Масло моторное G-Energy Synthetic Super Start 5W-30,751,1 л,shinka/product6.png,1,1
+8,Масло моторное G-Energy Synthetic Long Life 10W-40,580,1 л,shinka/product7.png,1,1
+9,Масло моторное G-Box Expert GL-4 75W-90,716,1 л,shinka/product8.png,1,1
+10,Масло моторное G-Box Expert GL-5 75W-90,898,1 л,shinka/product9.png,1,1
+11,Масло моторное Gazpromneft Premium N 5W-40,613,1 л,shinka/product10.png,1,1
+12,Масло моторное Gazpromneft Premium C3 5W-30,790,1 л,shinka/product11.png,1,1
+13,Масло моторное Gazpromneft Premium L 10W-40,375,1 л,shinka/product12.png,1,1
+14,Масло моторное Gazpromneft Premium A5B5 5W-30,660,1 л,shinka/product13.png,1,1
+15,Масло моторное Gazpromneft Super 10W-40,337,1 л,shinka/product14.png,1,1
+16,Масло моторное Gazpromneft GL-4 75W-90,646,1 л,shinka/product15.png,1,1
+17,Масло моторное Gazpromneft GL-5 75W-90,752,1 л,shinka/product16.png,1,1
+18,Масло моторное Gazpromneft Premium JK 5W-30,587,1 л,shinka/product17.png,1,1
+19,Масло моторное Gazpromneft ATF DX II,463,1 л,shinka/product18.png,1,4
+20,Масло моторное Gazpromneft ATF DX III,606,1 л,shinka/product19.png,1,1
+21,Масло моторное Gazpromneft GL-4 80W-85,460,1 л,shinka/product20.png,1,1
+22,Масло моторное Gazpromneft Super T-3,501,1 л,shinka/product21.png,1,1
+23,Масло моторное Gazpromneft Super T-3,1705,4 л,shinka/product22.png,1,1
+24,Масло моторное Gazpromneft Premium L 5W-40,1530,4 л,shinka/product23.png,1,1
+25,Масло моторное G-Energy Expert G 10W-40,1341,4 л,shinka/product24.png,1,1
+26,Масло моторное G-Energy Expert L 10W-40,438,1 л,shinka/product25.png,1,1
+27,Масло моторное G-Energy Expert L 10W-40,1593,4 л,shinka/product26.png,1,1
+28,Масло моторное Gazpromneft Diesel Extra 10W-40,333,1 л,shinka/product27.png,1,1
+29,Масло моторное Gazpromneft Diesel Extra 10W-40,1540,5 л,shinka/product28.png,1,1
+30,Масло моторное Gazpromneft Diesel Extra 10W-40,2981,10 л,shinka/product29.png,1,1
+31,Масло моторное G-Energy Synthetic Active 5W-30,2600,4 л,shinka/product30.png,1,1
+32,Масло моторное G-Energy Synthetic Active 5W-40,2700,4 л,shinka/product31.png,1,1
+33,Масло моторное G-Energy Synthetic Long Life 10W-40,2100,4 л,shinka/product32.png,1,1
+34,Масло моторное G-Energy Synthetic Super Start 5W-30,2750,4 л,shinka/product33.png,1,1
+35,Масло моторное G-Energy Synthetic Far East 5W-30,2800,4 л,shinka/product34.png,1,1
+36,Масло моторное G-Box Expert GL-5 75W-90,2950,4 л,shinka/product35.png,1,1
+37,Масло моторное G-Box Expert GL-4 75W-90,2450,4 л,shinka/product36.png,1,1
+38,Масло моторное Gazpromneft Premium N 5W-40,2227,4 л,shinka/product37.png,1,1
+39,Масло моторное Gazpromneft Premium L 10W-40,1360,4 л,shinka/product38.png,1,1
+40,Масло моторное Gazpromneft Super 10W-40,1220,4 л,shinka/product39.png,1,1
+41,Охлаждающая жидкость G-Energy Antifreeze 40,1073,5 л,shinka/product40.png,1,2
+42,Охлаждающая жидкость G-Energy Antifreeze RED 40,1086,5 л,shinka/product41.png,1,2
+43,Охлаждающая жидкость Антифриз Gazpromneft BS 40,1016,5 л,shinka/product42.png,1,2
+44,Охлаждающая жидкость Gazpromneft Антифриз 40,1033,5 кг,shinka/product43.png,1,2
+45,Охлаждающая жидкость G-Energy Antifreeze 40,242,1 л,shinka/product44.png,1,2
+46,Охлаждающая жидкость G-Energy Antifreeze RED 40,250,1 л,shinka/product45.png,1,2
+47,Охлаждающая жидкость Gazpromneft Антифриз BS 40,225,1 л,shinka/product46.png,1,2
+48,Охлаждающая жидкость Gazpromneft Антифриз 40,230,1 л,shinka/product47.png,1,2
+49,Масло моторное Gazpromneft Premium A5B5 5W-30,2397,4 л,shinka/product48.png,1,2
+50,Масло моторное Gazpromneft GL-4 75W-90,2193,4 л,shinka/product49.png,1,1
+51,Масло моторное Gazpromneft GL-5 75W-90,2558,4 л,shinka/product50.png,1,1
+52,Масло моторное Gazpromneft Premium JK 5W-30,2132,4 л,shinka/product51.png,1,1
+53,Жидкость тормозная G-Energy DOT 4,415,0.91 л,shinka/product52.png,1,4
+54,Масло для ГУР Gazpromneft PS Fluid,277,1 л,shinka/product53.png,1,1
+55,Масло моторное G-Energy G 10W-40,368,1 л,shinka/product54.png,1,1
+56,Масло моторное Gazpromneft Premium C3 5W-30,2867,4 л,shinka/product55.png,1,1
+57,Смазка Литол-24 дой-пак,100,0.1 л,shinka/product56.png,1,3
+58,Жидкость тормозная G-Energy Expert DOT 4,217,0.46 л,shinka/product57.png,1,4

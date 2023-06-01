@@ -1,22 +1,19 @@
 services:
   backend:
-    build: ./shinata_backend       
+    build: ./backend       
     ports:
       - "8000:8000"
     volumes:
-      - ./shinata_backend:/shinata_backend
-      - static:/shinata_backend/static
-      - media:/shinata_backend/media
-    # command: gunicorn shinata_backend.wsgi --bind 0.0.0.0:8000
+      - ./backend:/backend
+      - static:/backend/static
+      - media:/backend/media
 
   frontend:
-    build: ./shinata_frontend 
-    # volumes:
-    #   - shinata_build:/shinata_frontend/build
+    build: ./frontend 
     restart: unless-stopped
     expose:
       - 3000
-    command: serve -s /shinata_frontend/build -l 3000
+    command: serve -s /frontend/build -l 3000
     depends_on:
       - backend
 
@@ -27,15 +24,12 @@ services:
       - 80:8080
     volumes:
       - ./nginx/nginx-setup.conf:/etc/nginx/conf.d/default.conf:ro
-      # - shinata_build:/var/www/react
-      - static:/shinata_backend/static
-      - media:/shinata_backend/media
+      - static:/backend/static
+      - media:/backend/media
     depends_on:
-      # - backend
       - frontend
 
 volumes:
-  shinata_build:
   static:
     external: false
   media:

@@ -1,0 +1,1323 @@
+openapi: 3.0.2
+info:
+  title: 'Shinka API'
+  version: ''
+  description: |
+    запросы к API начинаются с `/api/v1/`
+    # Описание
+    Проект **Shinka**. Шиномантажный сервис.
+    
+    # Пользовательские роли
+    - **Аноним** — может просматривать любые страницы.
+    - **Аутентифицированный пользователь** (`user`) — может, как и **Аноним**, читать всё, дополнительно он может записаться на шиномонтаж.
+    - **Модератор** (`moderator`) — те же права, что и у **Аутентифицированного пользователя** плюс право просматривать записи клиентов на шиномонтаж.
+    - **Администратор** (`admin`) — полные права на управление всем контентом проекта. Может создавать и удалять сервисы, товары, категории товаров и сервисов, может формировать назначения на шиномонтаж. Может назначать роли пользователям. 
+servers:
+  - url: /api/v1/
+  
+tags:
+  - name: AUTH
+    description: Регистрация пользователей и выдача токенов
+  - name: CLIENT
+    description: Получение и обновление данных о пользователе
+  - name: APPOINTMENT
+    description: Получение назначений на указанную дату
+  - name: SERVICES
+    description: Услуги
+  - name: RECORD
+    description: Запись на шиномонтаж
+  - name: PRODUCTS
+    description: Товары
+  - name: FAQ
+    description: Получение списка часто задаваемых вопросов
+  - name: UNUSED
+    description: Неиспользуемые эндпоинты
+paths:
+  /api/v1/records/:
+    get:
+      operationId: listRecords
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RecordRead'
+          description: ''
+      tags:
+      - UNUSED
+        
+    post:
+      operationId: createRecord
+      description: 'Создание записи на шиномонтаж'
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Record'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Record'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Record'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Record'
+          description: ''
+      tags:
+      - RECORD
+  /api/v1/records/{client__username}/:
+    get:
+      operationId: retrieveRecord
+      description: 'Получение записей на шиномонтаж для определённого пользователя'
+      parameters:
+      - name: client__username
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordRead'
+          description: ''
+      tags:
+      - RECORD
+    put:
+      operationId: updateRecord
+      description: ''
+      parameters:
+      - name: client__username
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Record'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Record'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Record'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Record'
+          description: ''
+      tags:
+      - UNUSED
+    patch:
+      operationId: partialUpdateRecord
+      description: ''
+      parameters:
+      - name: client__username
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Record'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Record'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Record'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Record'
+          description: ''
+      tags:
+      - UNUSED
+    delete:
+      operationId: destroyRecord
+      description: 'Удаление записи на шиномонтаж'
+      parameters:
+      - name: client__username
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - RECORD
+  /api/v1/categories/:
+    get:
+      operationId: listServiceCategorys
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+          description: ''
+      tags:
+      - UNUSED
+    post:
+      operationId: createServiceCategory
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Category'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Category'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Category'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+          description: ''
+      tags:
+      - UNUSED
+  /api/v1/categories/{id}/:
+    get:
+      operationId: retrieveServiceCategory
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: "A unique integer value identifying this \u041A\u0430\u0442\u0435\
+          \u0433\u043E\u0440\u0438\u044F \u0443\u0441\u043B\u0443\u0433."
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+          description: ''
+      tags:
+      - UNUSED
+    put:
+      operationId: updateServiceCategory
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: "A unique integer value identifying this \u041A\u0430\u0442\u0435\
+          \u0433\u043E\u0440\u0438\u044F \u0443\u0441\u043B\u0443\u0433."
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Category'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Category'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Category'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+          description: ''
+      tags:
+      - UNUSED
+    patch:
+      operationId: partialUpdateServiceCategory
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: "A unique integer value identifying this \u041A\u0430\u0442\u0435\
+          \u0433\u043E\u0440\u0438\u044F \u0443\u0441\u043B\u0443\u0433."
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Category'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Category'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Category'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+          description: ''
+      tags:
+      - UNUSED
+    delete:
+      operationId: destroyServiceCategory
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: "A unique integer value identifying this \u041A\u0430\u0442\u0435\
+          \u0433\u043E\u0440\u0438\u044F \u0443\u0441\u043B\u0443\u0433."
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - UNUSED
+  /api/v1/appointments/:
+    get:
+      operationId: listAppointments
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Appointment'
+          description: ''
+      tags:
+      - UNUSED
+    post:
+      operationId: createAppointment
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+          description: ''
+      tags:
+      - UNUSED
+  /api/v1/appointments/{id}/:
+    get:
+      operationId: retrieveAppointment
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+          description: ''
+      tags:
+      - UNUSED
+    put:
+      operationId: updateAppointment
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+          description: ''
+      tags:
+      - UNUSED
+    patch:
+      operationId: partialUpdateAppointment
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+          description: ''
+      tags:
+      - UNUSED
+    delete:
+      operationId: destroyAppointment
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - UNUSED
+  /api/v1/services/:
+    get:
+      operationId: listServices
+      description: 'Получение услуг'
+      parameters:
+      - name: group__title
+        required: false
+        in: query
+        description: group__title
+        schema:
+          type: string
+      - name: description
+        required: false
+        in: query
+        description: description
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Service'
+          description: ''
+      tags:
+      - SERVICES
+    post:
+      operationId: createService
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Service'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Service'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Service'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+          description: ''
+      tags:
+      - UNUSED
+  /api/v1/services/{id}/:
+    get:
+      operationId: retrieveService
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: "A unique integer value identifying this \u0423\u0441\u043B\u0443\
+          \u0433\u0430."
+        schema:
+          type: string
+      - name: group__title
+        required: false
+        in: query
+        description: group__title
+        schema:
+          type: string
+      - name: description
+        required: false
+        in: query
+        description: description
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+          description: ''
+      tags:
+      - UNUSED
+    put:
+      operationId: updateService
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: "A unique integer value identifying this \u0423\u0441\u043B\u0443\
+          \u0433\u0430."
+        schema:
+          type: string
+      - name: group__title
+        required: false
+        in: query
+        description: group__title
+        schema:
+          type: string
+      - name: description
+        required: false
+        in: query
+        description: description
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Service'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Service'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Service'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+          description: ''
+      tags:
+      - UNUSED
+    patch:
+      operationId: partialUpdateService
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: "A unique integer value identifying this \u0423\u0441\u043B\u0443\
+          \u0433\u0430."
+        schema:
+          type: string
+      - name: group__title
+        required: false
+        in: query
+        description: group__title
+        schema:
+          type: string
+      - name: description
+        required: false
+        in: query
+        description: description
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Service'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Service'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Service'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+          description: ''
+      tags:
+      - UNUSED
+    delete:
+      operationId: destroyService
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: "A unique integer value identifying this \u0423\u0441\u043B\u0443\
+          \u0433\u0430."
+        schema:
+          type: string
+      - name: group__title
+        required: false
+        in: query
+        description: group__title
+        schema:
+          type: string
+      - name: description
+        required: false
+        in: query
+        description: description
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - UNUSED
+  /api/v1/clients/:
+    get:
+      operationId: listClients
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Client'
+          description: ''
+      tags:
+      - UNUSED
+    post:
+      operationId: createClient
+      description: 'Регистрация нового пользователя'
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Client'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Client'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Client'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Client'
+          description: ''
+      tags:
+      - AUTH
+  /api/v1/clients/{username}/:
+    get:
+      operationId: retrieveClient
+      description: 'Получение данных о пользователе'
+      parameters:
+      - name: username
+        in: path
+        required: true
+        description: "\u041E\u0431\u044F\u0437\u0430\u0442\u0435\u043B\u044C\u043D\
+          \u043E\u0435 \u043F\u043E\u043B\u0435. \u041D\u0435 \u0431\u043E\u043B\u0435\
+          \u0435 150 \u0441\u0438\u043C\u0432\u043E\u043B\u043E\u0432. \u0422\u043E\
+          \u043B\u044C\u043A\u043E \u0431\u0443\u043A\u0432\u044B, \u0446\u0438\u0444\
+          \u0440\u044B \u0438 \u0441\u0438\u043C\u0432\u043E\u043B\u044B @/./+/-/_."
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Client'
+          description: ''
+      tags:
+      - CLIENT
+    put:
+      operationId: updateClient
+      description: 'Обновление данных пользовател'
+      parameters:
+      - name: username
+        in: path
+        required: true
+        description: "\u041E\u0431\u044F\u0437\u0430\u0442\u0435\u043B\u044C\u043D\
+          \u043E\u0435 \u043F\u043E\u043B\u0435. \u041D\u0435 \u0431\u043E\u043B\u0435\
+          \u0435 150 \u0441\u0438\u043C\u0432\u043E\u043B\u043E\u0432. \u0422\u043E\
+          \u043B\u044C\u043A\u043E \u0431\u0443\u043A\u0432\u044B, \u0446\u0438\u0444\
+          \u0440\u044B \u0438 \u0441\u0438\u043C\u0432\u043E\u043B\u044B @/./+/-/_."
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Client'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Client'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Client'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Client'
+          description: ''
+      tags:
+      - CLIENT
+    patch:
+      operationId: partialUpdateClient
+      description: ''
+      parameters:
+      - name: username
+        in: path
+        required: true
+        description: "\u041E\u0431\u044F\u0437\u0430\u0442\u0435\u043B\u044C\u043D\
+          \u043E\u0435 \u043F\u043E\u043B\u0435. \u041D\u0435 \u0431\u043E\u043B\u0435\
+          \u0435 150 \u0441\u0438\u043C\u0432\u043E\u043B\u043E\u0432. \u0422\u043E\
+          \u043B\u044C\u043A\u043E \u0431\u0443\u043A\u0432\u044B, \u0446\u0438\u0444\
+          \u0440\u044B \u0438 \u0441\u0438\u043C\u0432\u043E\u043B\u044B @/./+/-/_."
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Client'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Client'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Client'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Client'
+          description: ''
+      tags:
+      - UNUSED
+    delete:
+      operationId: destroyClient
+      description: ''
+      parameters:
+      - name: username
+        in: path
+        required: true
+        description: "\u041E\u0431\u044F\u0437\u0430\u0442\u0435\u043B\u044C\u043D\
+          \u043E\u0435 \u043F\u043E\u043B\u0435. \u041D\u0435 \u0431\u043E\u043B\u0435\
+          \u0435 150 \u0441\u0438\u043C\u0432\u043E\u043B\u043E\u0432. \u0422\u043E\
+          \u043B\u044C\u043A\u043E \u0431\u0443\u043A\u0432\u044B, \u0446\u0438\u0444\
+          \u0440\u044B \u0438 \u0441\u0438\u043C\u0432\u043E\u043B\u044B @/./+/-/_."
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - UNUSED
+  /api/v1/service-groups/:
+    get:
+      operationId: listServiceGroups
+      description: 'Группа услуг'
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ServiceGroup'
+          description: ''
+      tags:
+      - SERVICES
+    post:
+      operationId: createServiceGroup
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceGroup'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ServiceGroup'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ServiceGroup'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceGroup'
+          description: ''
+      tags:
+      - UNUSED
+  /api/v1/service-groups/{id}/:
+    get:
+      operationId: retrieveServiceGroup
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: "A unique integer value identifying this \u0413\u0440\u0443\u043F\
+          \u043F\u0430 \u0443\u0441\u043B\u0443\u0433."
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceGroup'
+          description: ''
+      tags:
+      - UNUSED
+    put:
+      operationId: updateServiceGroup
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: "A unique integer value identifying this \u0413\u0440\u0443\u043F\
+          \u043F\u0430 \u0443\u0441\u043B\u0443\u0433."
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceGroup'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ServiceGroup'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ServiceGroup'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceGroup'
+          description: ''
+      tags:
+      - UNUSED
+    patch:
+      operationId: partialUpdateServiceGroup
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: "A unique integer value identifying this \u0413\u0440\u0443\u043F\
+          \u043F\u0430 \u0443\u0441\u043B\u0443\u0433."
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceGroup'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ServiceGroup'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ServiceGroup'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceGroup'
+          description: ''
+      tags:
+      - UNUSED
+    delete:
+      operationId: destroyServiceGroup
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: "A unique integer value identifying this \u0413\u0440\u0443\u043F\
+          \u043F\u0430 \u0443\u0441\u043B\u0443\u0433."
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - UNUSED
+  /api/v1/appointment/date/{date}/:
+    get:
+      operationId: retrieveApointment
+      description: ''
+      parameters:
+      - name: date
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - APPOINTMENT
+  /api/v1/appointments_manager/:
+    get:
+      operationId: listAppointmentsManagers
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {}
+          description: ''
+      tags:
+      - UNUSED
+    post:
+      operationId: createAppointmentsManager
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+          application/x-www-form-urlencoded:
+            schema: {}
+          multipart/form-data:
+            schema: {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - UNUSED
+  /api/v1/products-category/:
+    get:
+      operationId: listProductCategorys
+      description: 'Получение всех категорий товаров'
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {}
+          description: ''
+      tags:
+      - PRODUCTS
+  /api/v1/products/{productcategoryid}/:
+    get:
+      operationId: retrieveProduct
+      description: 'Получение товаров для определенной категории'
+      parameters:
+      - name: productcategoryid
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - PRODUCTS
+  /api/v1/searched-products/:
+    get:
+      operationId: listProducts
+      description: 'Получение искомых товаров (строка поиска)'
+      parameters:
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+          description: ''
+      tags:
+      - SERVICES
+  /api/v1/faq/:
+    get:
+      operationId: listFAQs
+      description: 'Получение часто задаваемых вопросов и ответов'
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {}
+          description: ''
+      tags:
+      - FAQ
+  /api/v1/token/login/:
+    post:
+      operationId: createTokenCreate
+      description: Используйте эту конечную точку для получения токена аутентификации пользователя.
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenCreate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenCreate'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenCreate'
+          description: ''
+      tags:
+      - AUTH
+  /api/v1/token/logout/:
+    post:
+      operationId: createTokenDestroy
+      description: Используйте эту конечную точку для выхода пользователя из системы (удалите токен аутентификации пользователя).
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+          application/x-www-form-urlencoded:
+            schema: {}
+          multipart/form-data:
+            schema: {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - AUTH
+components:
+  schemas:
+    RecordRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        client:
+          type: string
+          readOnly: true
+        appointment:
+          type: string
+          readOnly: true
+        description:
+          type: string
+          nullable: true
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        expired:
+          type: boolean
+        services:
+          type: array
+          items:
+            type: string
+          readOnly: true
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 200
+        slug:
+          type: string
+          maxLength: 50
+          pattern: ^[-a-zA-Z0-9_]+$
+        description:
+          type: string
+      required:
+      - title
+      - slug
+      - description
+    Appointment:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        dt:
+          type: string
+          format: date-time
+        reserved:
+          type: boolean
+        expired:
+          type: boolean
+        manager:
+          type: integer
+      required:
+      - dt
+      - manager
+    Service:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 200
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        price:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 100000
+          minimum: -100000
+          nullable: true
+        description:
+          type: string
+        category:
+          type: integer
+          nullable: true
+        group:
+          type: integer
+          nullable: true
+      required:
+      - title
+      - description
+    Client:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        username:
+          type: string
+          description: "\u041E\u0431\u044F\u0437\u0430\u0442\u0435\u043B\u044C\u043D\
+            \u043E\u0435 \u043F\u043E\u043B\u0435. \u041D\u0435 \u0431\u043E\u043B\
+            \u0435\u0435 150 \u0441\u0438\u043C\u0432\u043E\u043B\u043E\u0432. \u0422\
+            \u043E\u043B\u044C\u043A\u043E \u0431\u0443\u043A\u0432\u044B, \u0446\u0438\
+            \u0444\u0440\u044B \u0438 \u0441\u0438\u043C\u0432\u043E\u043B\u044B @/./+/-/_."
+          pattern: ^[\w.@+-]+\z
+          maxLength: 150
+        password:
+          type: string
+          maxLength: 128
+        phone:
+          type: string
+          maxLength: 128
+        car_brand:
+          type: string
+          maxLength: 200
+        car_model:
+          type: string
+          maxLength: 200
+      required:
+      - username
+      - password
+      - phone
+      - car_brand
+      - car_model
+    ServiceGroup:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 200
+        slug:
+          type: string
+          maxLength: 50
+          pattern: ^[-a-zA-Z0-9_]+$
+        description:
+          type: string
+        category:
+          type: integer
+          nullable: true
+      required:
+      - title
+      - slug
+      - description
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        brand:
+          type: string
+          maxLength: 200
+        price:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 100000
+          minimum: -100000
+          nullable: true
+        description:
+          type: string
+        image:
+          type: string
+          format: binary
+        in_stock:
+          type: integer
+        product_category:
+          type: integer
+          nullable: true
+      required:
+      - brand
+      - description
+    Record:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        client:
+          type: string
+          readOnly: true
+        description:
+          type: string
+          nullable: true
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        expired:
+          type: boolean
+        appointment:
+          type: integer
+        services:
+          type: array
+          items:
+            type: string
+          readOnly: true
+      required:
+      - appointment
+    TokenCreate:
+      type: object
+      properties:
+        password:
+          type: string
+        username:
+          type: string

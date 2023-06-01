@@ -1,7 +1,12 @@
-# Shinata  WORK IN PROGRESS
+# Shinka WORK IN PROGRESS
 ## Using Django and Djangorestframework for backend and React plus Mantine for frontend
 ### tire service app
 
+
+## Static documentation for the api
+```
+$ ./backend/static/schema.yaml
+```
 
 ## Setting up
 
@@ -15,7 +20,7 @@ CORS_ORIGIN_WHITELIST=http://<domain_name>:3000 http://localhost:3000
 ```
 
 ```
-$ vi ./frontend/.env
+$ ./frontend/.env
 REACT_APP_HOST=http://localhost or http://<domain_name>
 ```
 
