@@ -11,7 +11,7 @@ from .views import (ApointmentView, RecordViewSet, CategoryViewSet, AppointmentV
                     ProductView, ProductListView, ServiceGroupViewSet, FAQView)
 
 
-app_name = 'posts'
+app_name = 'api'
 
 router_v1 = routers.DefaultRouter()
 router_v1.register(r'records', RecordViewSet)
