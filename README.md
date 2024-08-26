@@ -1,5 +1,5 @@
 # Shinka WORK IN PROGRESS
-## Preview: http://www.izpodvypodverta.ru/
+## Preview: http://90.156.209.221/
 ## Using Django and Djangorestframework for backend and React plus Mantine for frontend
 ### tire service app
 
